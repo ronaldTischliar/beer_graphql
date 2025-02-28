@@ -38,7 +38,7 @@ public class BreweriesGraphQLCurlIT {
                             alcByVol
                           }
                         }}"}
-        """.toString());
+        """);
     var breweries = response.jsonPath().getList("data.breweries");
     breweries.forEach(System.out::println);
   }
@@ -47,7 +47,7 @@ public class BreweriesGraphQLCurlIT {
   @Test
   void createBadBrewery() {
     var response = runGraphQL("""
-          {"query":"mutation createBrewery($brewery: BreweryInput) { 
+          {"query":"mutation createBrewery($brewery: BreweryInput) {
            createBrewery(brewery: $brewery) {
                       name
                       yearOfFounding
@@ -69,7 +69,7 @@ public class BreweriesGraphQLCurlIT {
         """);
     var errors = response.jsonPath().getList("errors");
     assertThat(errors.size()).isEqualTo(1);
-    assertThat(errors.get(0).toString()).contains("BAD_REQUEST");
+    assertThat(errors.getFirst().toString()).contains("BAD_REQUEST");
 
   }
 
@@ -77,7 +77,7 @@ public class BreweriesGraphQLCurlIT {
   @Test
   void createBrewery() {
     var response = runGraphQL("""
-          {"query":"mutation createBrewery($brewery: BreweryInput) { 
+          {"query":"mutation createBrewery($brewery: BreweryInput) {
            createBrewery(brewery: $brewery) {
                       name
                       yearOfFounding
@@ -106,7 +106,7 @@ public class BreweriesGraphQLCurlIT {
   @Test
   void deleteBrewery() {
     var response = runGraphQL("""
-         {"query":"mutation deleteBrewery($name: String) { 
+         {"query":"mutation deleteBrewery($name: String) {
           deleteBrewery(name: $name) {
             name 
             yearOfFounding 

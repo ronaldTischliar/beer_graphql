@@ -113,7 +113,7 @@ subscription newBrewery {
 ------------
 
 
- Feature |REST|                                                                         GraphQL                                                                                                                     |
+|  Feature          |REST|                                                                         GraphQL                                                                                                                     |
 |-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | Schema            | No formal schema definition.| Strong typing with a schema definition language (SDL). Enforces data structure and improves developer experience.  |
 | Real-time Updates | No built-in support for real-time updates. Requires additional techniques like WebSockets.                                                              | Built-in support for real-time updates through subscriptions.                                                               |

@@ -5,7 +5,6 @@ import eu.ronald.brewery.entity.Brewery;
 import io.smallrye.graphql.api.Subscription;
 import io.smallrye.graphql.client.typesafe.api.GraphQLClientApi;
 import io.smallrye.mutiny.Multi;
-import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.microprofile.graphql.Mutation;
 import org.eclipse.microprofile.graphql.Query;
 
