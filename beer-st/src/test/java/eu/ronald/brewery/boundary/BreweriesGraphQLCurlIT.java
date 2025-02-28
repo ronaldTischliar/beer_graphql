@@ -108,8 +108,8 @@ public class BreweriesGraphQLCurlIT {
     var response = runGraphQL("""
          {"query":"mutation deleteBrewery($name: String) {
           deleteBrewery(name: $name) {
-            name 
-            yearOfFounding 
+            name
+            yearOfFounding
             createTime} }","variables":{"name":"Ronald"}
             }
         """);
