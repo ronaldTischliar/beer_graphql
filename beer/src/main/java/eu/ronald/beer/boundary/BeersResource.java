@@ -36,9 +36,9 @@ public class BeersResource {
     return Response.created(uri).build();
   }
 
-  @Path("{name}")
-  public BeerResource find(@PathParam("name") String name) {
-    return new BeerResource(breweryName, name, store);
+  @Path("{beerName}")
+  public BeerResource find(@PathParam("beerName") String beerName) {
+    return new BeerResource(breweryName, beerName, store);
   }
 
 
