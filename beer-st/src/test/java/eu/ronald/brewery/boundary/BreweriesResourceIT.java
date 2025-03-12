@@ -12,9 +12,6 @@ public class BreweriesResourceIT {
   @Inject
   BreweryDelegate breweryDelegate;
 
-  String RONALD_BAD_BREWERY = """
-      hhhhh
-      """;
   public static String RONALD_BREWERY = """
       {
       
@@ -23,6 +20,10 @@ public class BreweriesResourceIT {
            "name": "Ronald",
            "yearOfFounding": 2025
          }
+      """;
+
+  String RONALD_BAD_BREWERY = """
+      BAD BEER BREWERY
       """;
 
   @Test
