@@ -6,7 +6,6 @@ import eu.ronald.store.control.StoreService;
 import graphql.GraphQL;
 import graphql.language.Field;
 import graphql.language.OperationDefinition;
-import graphql.language.Selection;
 import graphql.schema.DataFetchingEnvironment;
 import graphql.schema.GraphQLSchema;
 import io.quarkus.logging.Log;
@@ -30,7 +29,6 @@ public class BreweriesGraphQL {
   @Inject
   Context context;
 
-
   BroadcastProcessor<Brewery> processor = BroadcastProcessor.create();
 
   @Inject
@@ -53,16 +51,10 @@ public class BreweriesGraphQL {
     if (!definitions.isEmpty()) {
       var operation = definitions.getFirst();
       var selections = operation.getSelectionSet().getSelections();
-      var metadata = new StringBuilder();
-      for (Selection selection : selections) {
-        if (selection instanceof Field) {
-          Field field = (Field) selection;
-          String fieldName = field.getName();
-          metadata.append("Field: ").append(fieldName).append("\n");
-          Log.info(field.getSelectionSet());
-          // You can add more logic to extract arguments, aliases, etc.
-        }
-      }
+      selections.stream().filter(selection -> selection instanceof Field).
+          map(selection -> (Field) selection).
+          forEach(field -> Log.info(field.getSelectionSet())
+          );
     }
   }
 
