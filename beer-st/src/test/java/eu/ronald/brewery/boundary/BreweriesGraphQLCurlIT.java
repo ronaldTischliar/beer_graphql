@@ -32,7 +32,7 @@ public class BreweriesGraphQLCurlIT {
          {"query":   "query all {
                         breweries {
                           name
-                          createTime
+   
                           beers {
                             name
                             alcByVol
