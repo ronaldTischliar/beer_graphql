@@ -52,15 +52,13 @@ public class BreweriesGraphQL {
       var operation = definitions.getFirst();
       var selections = operation.getSelectionSet().getSelections();
       selections.stream().filter(selection -> selection instanceof Field).
-          map(selection -> (Field) selection).
-          forEach(field -> Log.info(field.getSelectionSet())
-          );
+          map(selection -> (Field) selection).forEach(field -> Log.info(field.getSelectionSet()));
     }
   }
 
   @Query("breweries")
   public List<Brewery> allBreweries() {
-    interceptQuery();
+    //interceptQuery();
     return storeService.allBreweries();
   }
 
@@ -75,6 +73,7 @@ public class BreweriesGraphQL {
 
   @Mutation
   public Brewery createBrewery(Brewery brewery) {
+    Log.info("create Brewery " + brewery);
     storeService.addBrewery(brewery);
     processor.onNext(brewery);
     return brewery;
@@ -82,6 +81,7 @@ public class BreweriesGraphQL {
 
   @Mutation
   public Brewery deleteBrewery(String name) {
+    Log.info("delete Brewery " + name);
     return storeService.deleteBrewery(name);
   }
 

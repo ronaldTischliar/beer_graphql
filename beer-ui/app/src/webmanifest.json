@@ -1,0 +1,48 @@
+{
+  "name": "beer",
+  "short_name": "beer",
+  "start_url": ".",
+  "display_override": [
+    "fullscreen",
+    "minimal-ui"
+  ],
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#000",
+  "description": "Beer App",
+  "icons": [
+    {
+      "src": "images/beer.svg",
+      "sizes": "200x200",
+      "purpose": "any",
+      "type": "image/svg"
+    },
+    {
+      "src": "images/beer_144.png",
+      "sizes": "144x144",
+      "purpose": "any",
+      "type": "image/png"
+    },
+    {
+      "src": "images/beer_16.svg",
+      "sizes": "16x16",
+      "type": "image/svg",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "images/screen1.png",
+      "type": "image/png",
+      "sizes": "2866x1602",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "images/screen1.png",
+      "type": "image/png",
+      "sizes": "2866x1602",
+      "form_factor": "wide"
+    }
+  ]
+}
+

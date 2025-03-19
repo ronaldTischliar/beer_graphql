@@ -7,17 +7,17 @@ import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 @ApplicationScoped
 public class StoreService {
   public static final String AUGUSTIENER = "Augustiener";
   public static final String BRAUEZLOH = "Bräu z'Loh";
   public static final String RONALD = "Ronald";
-  final Store store = new Store(new ArrayList<>(), new ArrayList<>());
+  final Store store = new Store(new ConcurrentLinkedQueue<>(), new ConcurrentLinkedQueue<>());
 
   @PostConstruct
   public void init() {
@@ -46,12 +46,12 @@ public class StoreService {
   }
 
   public Optional<Brewery> brewery(String name) {
-    return store.breweries().stream().filter(t -> t.name().equals(name)).
+    return store.breweries().stream().filter(t -> t!=null && t.name().equals(name)).
         findAny();
   }
 
 
-  public Optional<Beer> beer(String breweryName,String name) {
+  public Optional<Beer> beer(String breweryName, String name) {
     return beers(breweryName).stream().filter(t -> t.name().equals(name)).
         findAny();
   }
@@ -64,13 +64,23 @@ public class StoreService {
     return store.beers().stream().filter(t -> t.brewery().equals(brewery.name())).toList();
   }
 
+
   public Brewery addBrewery(Brewery brewery) {
-    store.breweries().add(brewery);
+    if(brewery(brewery.name()).isPresent()) {
+     updateBrewery(brewery);
+    } else {
+      store.breweries().add(brewery);
+    }
     return brewery;
   }
 
+  private void updateBrewery(Brewery brewery) {
+    store.breweries().removeIf(t -> t.name().equalsIgnoreCase(brewery.name()));
+    store.breweries().add(brewery);
+  }
+
   public Brewery deleteBrewery(String name) {
-    store.beers().removeIf(t -> t.brewery().equalsIgnoreCase(name));
+    store.beers().removeIf(t -> t == null || t.brewery().equalsIgnoreCase(name));
     var result = this.brewery(name);
     store.breweries().removeIf(t -> t.name().equalsIgnoreCase(name));
     return result.orElse(Brewery.DEFAULT);
@@ -81,8 +91,8 @@ public class StoreService {
     return beer;
   }
 
-  public Beer deleteBeer(String breweryName,String name) {
-    var result = this.beer(breweryName,name);
+  public Beer deleteBeer(String breweryName, String name) {
+    var result = this.beer(breweryName, name);
     store.beers().removeIf(t -> t.name().equalsIgnoreCase(name));
     return result.orElse(Beer.DEFAULT);
   }
