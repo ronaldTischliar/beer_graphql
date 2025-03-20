@@ -17,9 +17,10 @@ class List extends BElement {
             <mdui-list>
                 ${list.map((brewery) => html`
                     <mdui-list-item href="viewer/${brewery.name}" target="">${brewery.name}
-                        <mdui-avatar slot="icon" src="../../../images/beer.svg"></mdui-avatar>
+                        <mdui-avatar slot="icon" src="../../../images/beer.svg" label="" >
+                        </mdui-avatar>
                         <span slot="description"></span>
-                        <mdui-button-icon icon="delete" slot="end-icon"
+                        <mdui-button-icon icon="delete" slot="end-icon"  style="color: red"
                                           @click="${event => this.deleteBrewery(event, brewery)}">
                         </mdui-button-icon>
 

@@ -1,5 +1,5 @@
 import {APP_SERVER_URL} from "../../app.config.js";
-import {loadBreweries, updateServerEvent} from "../../breweries/control/CRUDControl.js";
+import {loadBreweries, updateRemoteCall} from "../../breweries/control/CRUDControl.js";
 
 const GRAPHQL_URL = APP_SERVER_URL + "/graphql";
 
@@ -61,7 +61,7 @@ export const deleteBreweryRemote = async (id) => {
     if (responseData) {
         const {data,errors} = responseData;
         if(!errors) {
-            updateServerEvent("");
+            updateRemoteCall(false);
         }
     } else {
 
@@ -84,7 +84,7 @@ export const newBreweryRemote = async (breweryObject) => {
     if (responseData) {
         const {data,errors} = responseData;
         if(!errors) {
-            updateServerEvent("");
+            updateRemoteCall(false);
         }
     } else {
 

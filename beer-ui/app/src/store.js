@@ -1,7 +1,7 @@
 import { configureStore } from "./libs/redux-toolkit.esm.js";
 import { load } from "./localstorage/control/StorageControl.js";
 import { breweries } from "./breweries/entity/BreweriesReducer.js"
-import {loadBreweriesRemote} from "./server/control/ServerControl.js";
+import {loadBreweriesRemote} from "./remote/control/ServerControl.js";
 
 
 const reducer = {

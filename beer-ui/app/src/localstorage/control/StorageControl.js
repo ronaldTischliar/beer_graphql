@@ -12,7 +12,7 @@ const load = _ => {
     const storeObject = {
         list: [],
         brewery: {},
-        serverEvent: "",
+        remoteCall: ""
     };
     const ob = {
         "breweries": storeObject

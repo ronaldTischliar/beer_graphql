@@ -1,6 +1,6 @@
 import {createAction} from "../../libs/redux-toolkit.esm.js";
 import store from "../../store.js";
-import {deleteBreweryRemote,newBreweryRemote} from "../../server/control/ServerControl.js";
+import {deleteBreweryRemote,newBreweryRemote} from "../../remote/control/ServerControl.js";
 
 
 export const newBreweryAction = createAction("newBreweryAction");
@@ -14,9 +14,9 @@ export const deleteBrewery = (id) => {
     store.dispatch(deleteBreweryAction(id));
     deleteBreweryRemote(id);
 }
-export const updateServerEventAction = createAction("updateServerEventAction");
-export const updateServerEvent = (name) => {
-    store.dispatch(updateServerEventAction({name}));
+export const updateRemoteCallAction = createAction("updateRemoteCallAction");
+export const updateRemoteCall = (value) => {
+    store.dispatch(updateRemoteCallAction(value));
 }
 
 

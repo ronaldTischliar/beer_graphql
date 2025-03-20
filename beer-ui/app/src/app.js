@@ -7,7 +7,7 @@ import './menu/boundary/Menu.js';
 
 
 import {save} from "./localstorage/control/StorageControl.js";
-import {loadBreweriesRemote} from "./server/control/ServerControl.js";
+import {loadBreweriesRemote} from "./remote/control/ServerControl.js";
 
 store.subscribe(_ => {
     const state = store.getState();
@@ -23,8 +23,8 @@ router.setRoutes([
 ]);
 
 const timerId = setInterval(() => {
-    const {breweries: {serverEvent}} = store.getState();
-    if(serverEvent) {
+    const {breweries: {remoteCall}} = store.getState();
+    if (!remoteCall) {
         console.log("------------ Timeout every 10 Seconds " + new Date().toISOString());
         loadBreweriesRemote();
     }

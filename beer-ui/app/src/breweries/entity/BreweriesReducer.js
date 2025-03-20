@@ -4,13 +4,13 @@ import {
     deleteBreweryAction,
     newBreweryAction,
     updatedBreweryAction,
-    loadBreweriesAction, updateServerEventAction
+    loadBreweriesAction, updateRemoteCallAction
 } from "../control/CRUDControl.js";
 
 const initialState = {
     list: [],
     brewery: {},
-    serverEvent: "",
+    remoteCall: false
     //remoteActions :[],
 }
 
@@ -22,16 +22,16 @@ const removeBreweryWithId = (list, id) => {
 export const breweries = createReducer(initialState, (builder) => {
     builder.addCase(deleteBreweryAction, (state, {payload}) => {
         state.list = removeBreweryWithId(state.list, payload);
-        state.serverEvent = "delete";
+        state.remoteCall = true;
 
     }).addCase(newBreweryAction, (state, {payload}) => {
         state.list = state.list.concat(payload);
-        state.serverEvent = "update";
+        state.remoteCall = true;
     }).addCase(updatedBreweryAction, (state, {payload: {name, value}}) => {
         state.brewery[name] = value;
     }).addCase(loadBreweriesAction, (state, {payload}) => {
         state.list = payload;
-    }).addCase(updateServerEventAction,(state, {payload}) => {
-        state.serverEvent = payload;
+    }).addCase(updateRemoteCallAction,(state, {payload}) => {
+        state.remoteCall = payload;
     })
 })
