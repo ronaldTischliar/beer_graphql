@@ -34,6 +34,7 @@ class Add extends BElement {
         if (form.reportValidity() && form.checkValidity()) {
             newBrewery(brewery);
             snackbar({
+                closeable:true,
                 autoCloseDelay: 2000,
                 placement: "top-end",
                 message: "new Brewery added"
