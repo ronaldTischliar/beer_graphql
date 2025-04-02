@@ -35,7 +35,7 @@ class Add extends BElement {
             newBrewery(brewery);
             snackbar({
                 autoCloseDelay: 2000,
-                placement: "top-start",
+                placement: "top-end",
                 message: "new Brewery added"
             });
         }
