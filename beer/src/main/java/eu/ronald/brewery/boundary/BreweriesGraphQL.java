@@ -9,10 +9,13 @@ import graphql.language.OperationDefinition;
 import graphql.schema.DataFetchingEnvironment;
 import graphql.schema.GraphQLSchema;
 import io.quarkus.logging.Log;
+import io.quarkus.security.identity.SecurityIdentity;
+import io.quarkus.vertx.http.runtime.CurrentVertxRequest;
 import io.smallrye.graphql.api.Context;
 import io.smallrye.graphql.api.Subscription;
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.operators.multi.processors.BroadcastProcessor;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
@@ -29,10 +32,14 @@ public class BreweriesGraphQL {
   @Inject
   Context context;
 
+  @Inject
+  public CurrentVertxRequest request;
+
   BroadcastProcessor<Brewery> processor = BroadcastProcessor.create();
 
   @Inject
   StoreService storeService;
+
 
   public GraphQLSchema.Builder leakyAbstraction(@Observes GraphQLSchema.Builder builder) {
     Log.info(">>>>>>> Here we leak while building the schema");
@@ -54,11 +61,14 @@ public class BreweriesGraphQL {
       selections.stream().filter(selection -> selection instanceof Field).
           map(selection -> (Field) selection).forEach(field -> Log.info(field.getSelectionSet()));
     }
+
   }
 
   @Query("breweries")
   public List<Brewery> allBreweries() {
     //interceptQuery();
+    String headerValue = request.getCurrent().request().getHeader("beerHeader");
+    System.out.println(headerValue);
     return storeService.allBreweries();
   }
 

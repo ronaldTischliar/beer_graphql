@@ -2,6 +2,7 @@ package eu.ronald.brewery.boundary;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
+import io.restassured.http.Header;
 import io.restassured.response.Response;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
@@ -20,7 +21,7 @@ public class BreweriesGraphQLCurlIT {
   String GRAPHQL_URL;
 
   Response runGraphQL(String query) {
-    var response = given().contentType(ContentType.JSON).body(query).when().post(GRAPHQL_URL).then().assertThat().statusCode(200).and().extract().response();
+    var response = given().contentType(ContentType.JSON).body(query).header(new Header("beerHeader","Beer100")).when().post(GRAPHQL_URL).then().assertThat().statusCode(200).and().extract().response();
     response.getBody().prettyPrint();
     return response;
   }

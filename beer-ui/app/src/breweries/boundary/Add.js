@@ -51,7 +51,7 @@ class Add extends BElement {
         }
         if (parseInt(element.value) > 2025) {
             element.setCustomValidity(
-                "Please enter an Year until 2025");
+                "Please enter an year until 2025");
         }
     }
 
